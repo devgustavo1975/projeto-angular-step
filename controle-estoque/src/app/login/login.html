@@ -1,3 +1,9 @@
-<input type="text" name="username" id="username" placeholder="Usuário" />
-<input type="password" name="password" id="password" placeholder="Senha" />
-<button (click)="login()">Entrar</button>
+<!-- app.component.html -->
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <input type="email" formControlName="email" placeholder="E-mail" />
+  <input type="password" formControlName="password" placeholder="Senha" />
+  <button type="submit">Entrar</button>
+  
+<p *ngIf="loginForm.get('email')?.invalid">
+  E-mail inválido
+</p>

@@ -6,7 +6,7 @@ import { App } from './app';
 import { PainelAdmin } from './painel-admin/painel-admin';
 import { Estoque } from './estoque/estoque';
 import { Login } from './login/login';
-import { FormUsuarios } from './componentes/form-usuarios/form-usuarios';
+import { FormUsuarios } from './componentes/formulario-registro/formulario-registro';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Dashboard } from './dashboard/dashboard';
 

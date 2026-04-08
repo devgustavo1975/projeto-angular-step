@@ -1,0 +1,19 @@
+<!-- app.component.html -->
+<form [formGroup]="registroForm" (ngSubmit)="registrar()">
+  <input type="email" formControlName="email" placeholder="E-mail" />
+  <input type="password" formControlName="passwordHash" placeholder="Senha" />
+
+  <select formControlName="roles">
+    <option value="">Selecione uma função</option>
+    <option value="ADMIN">Administrador</option>
+    <option value="OPER">Operacional</option>
+    <option value="GER">Gerente</option>
+  </select>
+
+  <input type="text" formControlName="firstName" placeholder="Nome" />
+  <button type="submit">Entrar</button>
+</form>
+
+<p *ngIf="registroForm.get('email')?.invalid">
+  E-mail inválido
+</p>

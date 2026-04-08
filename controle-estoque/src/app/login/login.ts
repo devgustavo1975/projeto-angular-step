@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '../servicos/auth';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -9,17 +9,22 @@ import { Auth } from '../servicos/auth';
   styleUrl: './login.css',
 })
 export class Login {
-  constructor(private router: Router, private auth: Auth) {}
+  constructor(private auth: Auth, private router: Router) {}
 
-  login() {
-    this.auth.login('usuario', 'admin');
-    this.checkLogin();
-  }
+loginForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+});
 
-  checkLogin() {
-    if (this.auth.estaLogado()) {
-      this.router.navigate(['/painel-admin']);
-    }
-  }
-
+login() {
+  this.auth.login(this.loginForm.value).subscribe({
+    next: (response:any) => {
+      console.log('Usuário logado com sucesso:', response);
+      this.router.navigate(['/dashboard']);
+    },
+    error: (error) => {
+      console.error('Erro ao fazer login:', error);
+    },
+  });
+}
 }
