@@ -1,6 +1,5 @@
 
 import { Component } from '@angular/core';
-//adicione o RouterOutlet no imports
 import { RouterOutlet } from '@angular/router';
 
 @Component({
