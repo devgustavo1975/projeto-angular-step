@@ -1,0 +1,13 @@
+
+<h2>Painel Administrativo</h2>
+
+<ul>
+  @for (usuario of usuarios; track usuario.id) {
+    <li>
+      <strong>Nome:</strong> {{ usuario.name.firstname }} {{ usuario.name.lastname }} <br>
+      <strong>Username:</strong> {{ usuario.username }} <br>
+      <strong>Email:</strong> {{ usuario.email }}
+    </li>
+  }
+</ul>
+          
