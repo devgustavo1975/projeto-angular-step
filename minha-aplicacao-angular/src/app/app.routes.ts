@@ -1,7 +1,7 @@
 
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth-guard';
-import { roleGuard } from './role.guard-guard';
+
 
 export const routes: Routes = [
   {
@@ -22,7 +22,6 @@ export const routes: Routes = [
       import('./pages/detalhe-produto/detalhe-produto').then(
         (m) => m.DetalheProduto
       ),
-    canActivate: [roleGuard]
   },
   {
     path: 'painel-adm',
@@ -30,13 +29,21 @@ export const routes: Routes = [
       import('./painel-adm/painel-adm').then(
         (m) => m.PainelAdm
       ),
-    canActivate: [authGuard, roleGuard],
+    canActivate: [authGuard],
+  },
+  {
+    path: 'componente-pai',
+    loadComponent: () =>
+      import('./pages/componente-pai/componente-pai').then(
+        (m) => m.ComponentePai
+      ),
   },
   {
     path: '**',
     redirectTo: 'produtos',
   }
 ];
+          
                   
           
           
