@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth } from '../servicos/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../servicos/auth';
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './login.css',
 })
 export class Login {
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
 loginForm = new FormGroup({
     email: new FormControl('', Validators.required),

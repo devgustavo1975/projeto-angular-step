@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Auth } from '../../servicos/auth';
+import { AuthService } from '../../servicos/auth';
 
 @Component({
   selector: 'app-form-usuarios',
@@ -9,7 +9,7 @@ import { Auth } from '../../servicos/auth';
   styleUrl: './formulario-registro.css',
 })
 export class FormUsuarios {
-  constructor(@Inject(Auth) private authService: Auth) {}
+  constructor(@Inject(AuthService) private authService: AuthService) {}
 
   registroForm = new FormGroup({
     name: new FormControl('', Validators.required),

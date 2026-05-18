@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PainelAdmin } from './painel-admin/painel-admin';
-import { Login } from './login/login';
-import { Dashboard } from './dashboard/dashboard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: Login },
-  { path: 'painel-admin', component: PainelAdmin },
-  {path: 'dashboard', component: Dashboard },
- 
+  { path: 'painel-adm', component: PainelAdmin }, // ✅ Apenas esta rota
+  { path: '', redirectTo: 'painel-adm', pathMatch: 'full' } // Rota inicial
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

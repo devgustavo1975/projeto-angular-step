@@ -1,29 +1,38 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class Auth {
-   apiUrl = 'https://projeto-node-step-git-main-fabios-projects-d2648344.vercel.app/api/auth';
-   apiKey = 'Step@2025';
-  headers = new HttpHeaders({
-      'x-api-key': this.apiKey
+export class AuthService {
+  private apiUrl = 'https://projeto-node-step-git-main-fabios-projects-d2648344.vercel.app/api/auth/login';
+
+  constructor(private http: HttpClient) { }
+
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials);
+  }
+
+  registrar(dados: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, dados);
+  }
+
+  salvarToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  obterToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  removerToken(): void {
+    localStorage.removeItem('token');
+  }
+
+  obterUsuarioLogado(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/me`, {
+      headers: { Authorization: `Bearer ${this.obterToken()}` }
     });
-
-  constructor(private http: HttpClient) {}
-
-  registrar(usuario: any) {
-    return this.http.post(`${this.apiUrl}/register`, usuario, { headers: this.headers });
-  }
-
-  login(usuario: any) {
-    return this.http.post(`${this.apiUrl}/login`, usuario, { headers: this.headers });
-  }
-
-  // busca o token do usuario logado
-  me(usuario: any) {
-    return this.http.post(`${this.apiUrl}/me`, usuario, { headers: this.headers });
   }
 }
