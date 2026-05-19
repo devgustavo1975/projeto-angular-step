@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Produto } from '../produto';
 
 @Component({
@@ -9,8 +9,8 @@ import { Produto } from '../produto';
 })
 export class Dashboard implements OnInit {
 
-  produtos: any[] = [];
-  carregando: boolean = true;
+ produtos = signal<any[]>([]);
+ carregando: boolean = true;
 
   constructor(private produto: Produto) { }
 
@@ -23,7 +23,7 @@ export class Dashboard implements OnInit {
 
     this.produto.listarProdutos().subscribe({
       next: (res: any[]) => {
-        this.produtos = res;
+        this.produtos.set(res);
         this.carregando = false;
       },
 
