@@ -1,30 +1,34 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { ProductService } from '../produto';
+import { Component, OnInit } from '@angular/core';
+import { Produto } from '../produto';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: false,
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
-export class DashboardComponent implements OnInit {
+export class Dashboard implements OnInit {
 
   produtos: any[] = [];
   carregando: boolean = true;
 
-  constructor(@Inject(ProductService) private productService: ProductService) { }
+  constructor(private produto: Produto) { }
 
   ngOnInit(): void {
     this.carregarProdutos();
   }
 
   carregarProdutos(): void {
-    this.productService.listarProdutos().subscribe({
-      next: (res) => {
+    this.carregando = true;
+
+    this.produto.listarProdutos().subscribe({
+      next: (res: any[]) => {
         this.produtos = res;
         this.carregando = false;
       },
-      error: (err) => {
-        console.error('Erro ao carregar produtos', err);
+
+      error: (err: any) => {
+        console.error('Erro ao carregar produtos:', err);
         this.carregando = false;
       }
     });

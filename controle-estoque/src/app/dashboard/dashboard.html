@@ -1,1 +1,52 @@
-<p>asdasds dasds!</p>
+<div class="container">
+
+  <h2>Dashboard de Produtos</h2>
+
+  <!-- Carregando -->
+  <div *ngIf="carregando">
+    <p>Carregando produtos...</p>
+  </div>
+
+  <!-- Lista de produtos -->
+  <div class="row" *ngIf="!carregando">
+
+    <div
+      class="card"
+      *ngFor="let produto of produtos"
+    >
+
+      <img
+        [src]="produto.image"
+        [alt]="produto.title"
+        class="imagem-produto"
+      >
+
+      <h3>{{ produto.title }}</h3>
+
+      <p>
+        <strong>Categoria:</strong>
+        {{ produto.category }}
+      </p>
+
+      <p>
+        <strong>Preço:</strong>
+        R$ {{ produto.price }}
+      </p>
+
+      <p>
+        <strong>Avaliação:</strong>
+        {{ produto.rating?.rate }}
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Caso não existam produtos -->
+  <div *ngIf="!carregando && produtos.length === 0">
+
+    <p>Nenhum produto encontrado.</p>
+
+  </div>
+
+</div>

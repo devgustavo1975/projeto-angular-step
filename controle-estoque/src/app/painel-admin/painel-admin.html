@@ -1,19 +1,43 @@
 <!-- Tela do Painel Administrativo -->
 <div class="painel-adm-container">
+
   <h1>Painel Administrativo</h1>
 
+  <p>
+    Área restrita para administradores do sistema.
+  </p>
+
   <nav>
-    <!-- Menu do painel, se tiver -->
     <ul>
-      <li>Dashboard</li>
-      <li>Produtos</li>
-      <li>Relatórios</li>
+      <li>
+        <a routerLink="/dashboard">Dashboard</a>
+      </li>
+
+      <li>
+        <a routerLink="/produtos">Produtos</a>
+      </li>
+
+      <li>
+        <a routerLink="/relatorios">Relatórios</a>
+      </li>
     </ul>
   </nav>
 
+  <hr>
+
   <div class="conteudo-principal">
-    <!-- ✅ AQUI ESTÁ O COMPONENTE FILHO SENDO RENDERIZADO -->
-    <h2>Registro de Novo Item</h2>
-    <app-form-usuarios></app-form-usuarios>
+
+    <h2>Registro de Novo Usuário</h2>
+
+    <!-- COMPONENTE FILHO -->
+    <app-formulario-registro></app-formulario-registro>
+
   </div>
+
+  <br>
+
+  <button (click)="voltarDashboard()">
+    Voltar ao Dashboard
+  </button>
+
 </div>
