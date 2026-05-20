@@ -9,27 +9,27 @@ import { Produto } from '../produto';
 })
 export class Dashboard implements OnInit {
 
- produtos = signal<any[]>([]);
- carregando: boolean = true;
+  // Mantive o signal, definindo o tipo correto para maior segurança
+  produtos = signal<Produto[]>([]);
+  carregando = signal<boolean>(true); // Alterei para signal também, mantendo consistência
 
-  constructor(private produto: Produto) { }
+  constructor(private produtoService: Produto) { } // Melhorei o nome para deixar claro que é um serviço
 
   ngOnInit(): void {
     this.carregarProdutos();
   }
 
   carregarProdutos(): void {
-    this.carregando = true;
+    this.carregando.set(true); // Atualiza o estado de carregamento
 
-    this.produto.listarProdutos().subscribe({
-      next: (res: any[]) => {
-        this.produtos.set(res);
-        this.carregando = false;
+    this.produtoService.listarProdutos().subscribe({
+      next: (res: Produto[]) => {
+        this.produtos.set(res); // Atribui os dados ao signal
+        this.carregando.set(false); // Finaliza o carregamento
       },
-
       error: (err: any) => {
         console.error('Erro ao carregar produtos:', err);
-        this.carregando = false;
+        this.carregando.set(false); // Mesmo com erro, finaliza o carregamento
       }
     });
   }

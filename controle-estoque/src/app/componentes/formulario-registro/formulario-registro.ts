@@ -1,70 +1,68 @@
-import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../servicos/auth';
+import { Component } from '@angular/core';
+
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 @Component({
   selector: 'app-formulario-registro',
-  standalone: false,
   templateUrl: './formulario-registro.html',
-  styleUrl: './formulario-registro.css',
+  styleUrls: ['./formulario-registro.css']
 })
+
 export class FormUsuarios {
 
-  mensagem = '';
-  erro = false;
+  registroForm: FormGroup;
 
   constructor(
-    @Inject(AuthService) private authService: AuthService
-  ) {}
+    private fb: FormBuilder
+  ) {
 
-  registroForm = new FormGroup({
+    this.registroForm = this.fb.group({
 
-    nome: new FormControl('', Validators.required),
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
 
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]),
+      passwordHash: [
+        '',
+        Validators.required
+      ],
 
-    senha: new FormControl('', Validators.required),
+      roles: [
+        '',
+        Validators.required
+      ],
 
-    perfil: new FormControl('usuario', Validators.required),
-  });
+      firstName: [
+        '',
+        Validators.required
+      ]
 
-  registrar() {
+    });
 
-    if (this.registroForm.invalid) {
+  }
 
-      this.erro = true;
-      this.mensagem = 'Preencha todos os campos corretamente.';
+  registrar(): void {
 
-      return;
+    if (this.registroForm.valid) {
+
+      console.log(
+        this.registroForm.value
+      );
+
+    } else {
+
+      this.registroForm.markAllAsTouched();
+
     }
 
-    this.authService.registrar(this.registroForm.value).subscribe({
-
-      next: (response) => {
-
-        this.erro = false;
-
-        this.mensagem = 'Usuário registrado com sucesso!';
-
-        console.log('Usuário registrado com sucesso:', response);
-
-        // Limpa formulário
-        this.registroForm.reset({
-          perfil: 'usuario'
-        });
-      },
-
-      error: (error) => {
-
-        this.erro = true;
-
-        this.mensagem = 'Erro ao registrar usuário.';
-
-        console.error('Erro ao registrar usuário:', error);
-      },
-    });
   }
+
 }

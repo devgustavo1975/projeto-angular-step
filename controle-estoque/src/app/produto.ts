@@ -12,6 +12,11 @@ export class Produto {
   // URL DA FAKE STORE API
   private apiUrl =
     'https://fakestoreapi.com/products';
+rating: any;
+price: any;
+category: any;
+title: any;
+image: any;
 
   constructor(private http: HttpClient) { }
 

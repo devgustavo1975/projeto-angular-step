@@ -1,45 +1,53 @@
 import { NgModule } from '@angular/core';
-
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { Login } from './login/login';
 import { Dashboard } from './dashboard/dashboard';
 import { PainelAdmin } from './painel-admin/painel-admin';
+import { FormUsuarios } from './componentes/formulario-registro/formulario-registro';
 
 import { RoleGuard } from './guards/role-guard';
 
 const routes: Routes = [
 
-  // LOGIN
   {
     path: 'login',
     component: Login
   },
 
-  // DASHBOARD
   {
     path: 'dashboard',
     component: Dashboard
   },
 
-  // PAINEL ADMINISTRATIVO PROTEGIDO
   {
-    path: 'painel-adm',
+    path: 'painel-admin',
     component: PainelAdmin,
     canActivate: [RoleGuard]
   },
 
-  // ROTA INICIAL
+  {
+    path: 'formulario-registro',
+    component: FormUsuarios
+  },
+
+  // REMOVA ESSAS ROTAS até criar os componentes
+  // {
+  //   path: 'produtos',
+  //   component: ProdutosComponent
+  // },
+  //
+  // {
+  //   path: 'relatorios',
+  //   component: RelatoriosComponent
+  // },
+
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
 
-  // ROTA NÃO ENCONTRADA
   {
     path: '**',
     redirectTo: 'login'
@@ -47,14 +55,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule { }

@@ -3,12 +3,12 @@
   <h2>Dashboard de Produtos</h2>
 
   <!-- Carregando -->
-  <div *ngIf="carregando">
+  <div *ngIf="carregando()">
     <p>Carregando produtos...</p>
   </div>
 
   <!-- Lista de produtos -->
-  <div class="row" *ngIf="!carregando">
+  <div class="row" *ngIf="!carregando()">
 
     <div
       class="card"
@@ -43,10 +43,8 @@
   </div>
 
   <!-- Caso não existam produtos -->
-  <div *ngIf="!carregando && produtos.length === 0">
-
+  <div *ngIf="!carregando() && produtos().length === 0">
     <p>Nenhum produto encontrado.</p>
-
   </div>
 
 </div>

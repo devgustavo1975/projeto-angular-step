@@ -3,22 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import { RouterModule } from '@angular/router';
 
 import { App } from './app';
-import { PainelAdmin } from './painel-admin/painel-admin';
-import { FormUsuarios } from './componentes/formulario-registro/formulario-registro';
 import { Dashboard } from './dashboard/dashboard';
+import { PainelAdmin } from './painel-admin/painel-admin';
+import { Login } from './login/login';
 
-import { AppRoutingModule } from './app-routing-module';
+import { FormUsuarios } from './componentes/formulario-registro/formulario-registro';
+
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-
   declarations: [
     App,
+    Dashboard,
     PainelAdmin,
-    FormUsuarios,
-    Dashboard
+    Login,
+    FormUsuarios
   ],
 
   imports: [
@@ -34,7 +37,6 @@ import { AppRoutingModule } from './app-routing-module';
   providers: [],
 
   bootstrap: [App]
-
 })
 
 export class AppModule { }
